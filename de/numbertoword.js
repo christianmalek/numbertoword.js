@@ -4,26 +4,89 @@ var ntw;
     var dict = ["null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn",
         "elf", "zwölf", "sechzehn", "siebzehn",
         "zwanzig", "dreissig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig",
-        "und", "ein", "hundert"
+        "und", "ein",
+        "hundert", "tausend", "ionen", "iarden", "eine"
+    ];
+
+    var millionUpwardsDict = ["mill", "bill", "trill", "quadrill", "quint",
+        "sextill", "septill", "oktill", "nonill", "dezill"
     ];
 
     function numberToWord(number) {
+        if (typeof number === "undefined")
+            return;
+
+        var word = "";
+
+        //10^n, n ermitteln
+        var powerToTen = getPowerToTen(number);
+        var flattenPower = getFlattenPower(powerToTen);
+
+        while (flattenPower > 2) {
+
+            var base = getBase(flattenPower, number);
+            number = cutTop(flattenPower, number);
+
+            if (base > 0) {
+                word += getZeroToNineHundredNinetyNine(base, flattenPower);
+                if (flattenPower > 5)
+                    word += getMillionUpwardsWord(flattenPower);
+                else
+                    word += dict[26]; //tausend
+            }
+
+            flattenPower -= 3;
+        }
+        if (number > 0 || powerToTen < 3)
+            word += getZeroToNineHundredNinetyNine(number, flattenPower);
+        return word;
+    };
+
+    function getMillionUpwardsWord(flattenPower) {
+        var prefixIndex = (flattenPower - flattenPower % 6) / 6 - 1;
+        var prefix = millionUpwardsDict[prefixIndex]; //mill bill etc.
+        var suffix = flattenPower % 2 === 0 ? dict[27] : dict[28]; //ionen oder iarden
+        return prefix + suffix;
+    }
+
+    function getZeroToNineHundredNinetyNine(number, power) {
         var units = getFlatPosition(1, number);
         var tens = getFlatPosition(10, number);
         var hundreds = getFlatPosition(100, number);
         var word = "";
-
         if (hundreds > 0)
             word += getHundreds(hundreds);
-
-        if (tens === 0)
-            word += getZeroToNine(units);
-        else if (tens === 1)
+        if (tens === 0) {
+            if (hundreds === 0 || hundreds > 0 && units > 0) {
+                word += getZeroToNine(units, power);
+            }
+        } else if (tens === 1)
             word += getTenTillNineteen(units);
         else
             word += getTwentyTillNinetyNine(tens, units);
 
         return word;
+    }
+
+    //gibt zurück, wie viel Tausend, Millionen etc. vorhanden sind
+    //Bsp.: 123456 hat 123 Tausender
+    //power: 10^power
+    //number: zu untersuchende Zahl
+    function getBase(flattenPower, number) {
+        var sum = Math.pow(10, flattenPower);
+        return (number - number % sum) / sum;
+    }
+
+    function cutTop(flattenPower, number) {
+        return number % Math.pow(10, flattenPower);
+    }
+
+    function getFlattenPower(power) {
+        return power - power % 3;
+    }
+
+    function getPowerToTen(number) {
+        return number.toString().length - 1;
     }
 
     //gibt Einser-, Zehnerstelle usw. zurück
@@ -36,8 +99,16 @@ var ntw;
         return flattenNumber;
     }
 
-    function getZeroToNine(units) {
-        return dict[units]; //0 - 9
+    function getZeroToNine(units, power) {
+        if (typeof power === "undefined")
+            power = 0;
+
+        if (power > 5 && units === 1)
+            return dict[29]; //eine
+        else if (power > 2)
+            return dict[24]; //ein
+        else
+            return dict[units]; //0 - 9
     };
 
     function getTenTillNineteen(units) {
