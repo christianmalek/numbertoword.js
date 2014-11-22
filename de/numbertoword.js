@@ -103,12 +103,13 @@ var ntw;
         if (typeof power === "undefined")
             power = 0;
 
-        if (power > 5 && units === 1)
-            return dict[29]; //eine
-        else if (power > 2)
-            return dict[24]; //ein
-        else
-            return dict[units]; //0 - 9
+        if (units === 1) {
+            if (power > 5)
+                return dict[29]; //eine
+            else if (power > 2)
+                return dict[24]; //ein
+        }
+        return dict[units]; //0 - 9
     };
 
     function getTenTillNineteen(units) {
