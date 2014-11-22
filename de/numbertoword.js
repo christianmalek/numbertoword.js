@@ -1,16 +1,20 @@
-var ntw = {};
+var ntw;
 
 (function() {
     var dict = ["null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn",
         "elf", "zwölf", "sechzehn", "siebzehn",
         "zwanzig", "dreissig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig",
-        "und", "ein"
+        "und", "ein", "hundert"
     ];
 
     function numberToWord(number) {
         var units = getFlatPosition(1, number);
         var tens = getFlatPosition(10, number);
+        var hundreds = getFlatPosition(100, number);
         var word = "";
+
+        if (hundreds > 0)
+            word += getHundreds(hundreds);
 
         if (tens === 0)
             word += getZeroToNine(units);
@@ -60,6 +64,14 @@ var ntw = {};
         return word + dict[tens + 13]; //+ 20 30 40 50 60 70 80 90 an
     };
 
+    function getHundreds(hundreds) {
+        if (hundreds === 0)
+            return "";
+        else if (hundreds === 1)
+            return dict[24] + dict[25];
+        else
+            return dict[hundreds] + dict[25];
+    }
+
     ntw = numberToWord;
-    ntw.flat = getFlatPosition;
 }());

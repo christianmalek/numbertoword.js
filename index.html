@@ -2,6 +2,15 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
 	<script src="de/numbertoword.js"></script>
+	<script src="app.js"></script>
 </head>
+<body>
+	<div ng-app="numbertoword" ng-controller="mainController">
+		<input style="width: 100%" type="range" min=0 max=999 step=1 ng-model="slider">
+		<p><input type="number" min=0 max=999 ng-model="number">
+		oder {{word}}</p>
+	</div>
+</body>
 </html>
