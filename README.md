@@ -1,4 +1,4 @@
-numbertoword
+numbertoword.js
 ============
 
 Converts numbers to words (german only). Works from zero to octillion (*in german Quadrilliarde*)
@@ -25,3 +25,8 @@ Take a look at this plunker to see the converter in action: [plunker][converter]
 ```
 
 [ntw]: https://github.com/Phisherman/numbertoword/blob/master/de/numbertoword.js
+
+
+## License
+
+MIT License
