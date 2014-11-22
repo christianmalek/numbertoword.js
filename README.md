@@ -1,8 +1,7 @@
 numbertoword
 ============
 
-Converts numbers to words (german only).
-At the moment only numbers 0 to 999 get converted correctly!
+Converts numbers to words (german only). Works from zero to octillion (*in german Quadrilliarde*)
 
 ## demo
 Take a look at this plunker to see the converter in action: [plunker][converter]
