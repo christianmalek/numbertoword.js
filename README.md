@@ -1,7 +1,8 @@
 numbertoword
 ============
 
-Converts numbers to words (german only)
+Converts numbers to words (german only).
+At the moment only numbers 0 to 99 get converted correctly!
 
 # 30s look
 ```html
