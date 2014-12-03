@@ -4,7 +4,7 @@ numbertoword.js
 Converts numbers to words (german only). Works from zero to octillion (*in german Quadrilliarde*)
 
 ## demo
-Take a look at this plunker to see the converter in action: [plunker][converter]
+Take a look at this plunker to see the converter in action: TODO(link is broken)
 
 [converter]: http://plnkr.co/edit/uYrDYqLlvVKXof4beZ7J?p=preview
 
