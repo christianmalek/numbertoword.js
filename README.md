@@ -3,11 +3,6 @@ numbertoword.js
 
 Converts numbers to words (german only). Works from zero to octillion (*in german Quadrilliarde*)
 
-## demo
-Take a look at this plunker to see the converter in action: TODO(link is broken)
-
-[converter]: http://plnkr.co/edit/uYrDYqLlvVKXof4beZ7J?p=preview
-
 ## 30s look
 ```html
 <!doctype html>
@@ -23,10 +18,3 @@ Take a look at this plunker to see the converter in action: TODO(link is broken)
 </head>
 </html>
 ```
-
-[ntw]: https://github.com/Phisherman/numbertoword/blob/master/de/numbertoword.js
-
-
-## License
-
-MIT License
